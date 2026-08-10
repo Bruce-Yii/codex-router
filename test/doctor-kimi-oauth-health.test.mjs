@@ -2,10 +2,8 @@ import assert from "node:assert/strict";
 import { spawn, spawnSync } from "node:child_process";
 import { once } from "node:events";
 import {
-  existsSync,
   mkdirSync,
   mkdtempSync,
-  rmdirSync,
   rmSync,
   writeFileSync,
 } from "node:fs";
@@ -44,7 +42,7 @@ after(() => {
 });
 
 function removeDirectoryIfPresent(directory) {
-  if (existsSync(directory)) rmdirSync(directory);
+  rmSync(directory, { recursive: true, force: true });
 }
 
 function doctorKimiCheck({ selected, credential }) {
